@@ -6,9 +6,6 @@ const counter = document.querySelector("#counter");
 const error = document.querySelector("#error");
 
 const list = document.querySelector("#list");
-const item = document.createElement('li');
-const itemLabel = document.createElement('span');
-
 
 const promptError = "You must enter a task"
 const promptDefault = "";
@@ -24,13 +21,16 @@ function addBtnClick(){
         return;
     } else {
         error.innerText = promptDefault;
-        const text = input.value;
 
-        list.appendChild(item);
+        const text = input.value;                   // the value of the input field is assigned to the variable text
 
-        itemLabel.innerText = text;
-        item.appendChild(itemLabel);
+        const item = document.createElement('li');   // Create a listitem and stores it in the variable item
+        list.appendChild(item);                       // Appends a item as a child element to the element list
 
+        const itemLabel = document.createElement('span'); // Creates a span element and stores it in variable called itemLabel
+        itemLabel.innerText = text;                        // The value of the span element is set to that of the variable text
+        item.appendChild(itemLabel);                        // appends the span element as a child element of the listitem
+        
     }
     input.value = "";
 }
