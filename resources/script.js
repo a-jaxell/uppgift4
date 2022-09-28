@@ -12,7 +12,7 @@ const promptDefault = "";
 
 //Event listerners
 addBtn.addEventListener('click', addBtnClick);
-itemLabel.addEventListener('click', completedToggle);
+list.addEventListener('click', completedToggle);
 
 //Functions
 function addBtnClick(){
@@ -34,7 +34,8 @@ function addBtnClick(){
     }
     input.value = "";
 }
-function completedToggle(){
+function completedToggle(e){                // Checks if element has the style class of completed and assigns it and increases the counter
+    let item = e.target.parentNode;
     if( item.getAttribute('class') == 'completed'){
         item.setAttribute('class', '');
         counter.innerText = --counterNum + " Completed tasks";
