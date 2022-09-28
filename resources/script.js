@@ -15,7 +15,7 @@ list.addEventListener('click', handleDeleteOrCheck);
 
 //Functions
 function addBtnClick(){
-    if(input.value == 0){
+    if(input.value.length == 0){
         error.innerText = promptError;
         return;
     } else {
