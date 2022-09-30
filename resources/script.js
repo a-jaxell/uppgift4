@@ -1,26 +1,29 @@
 // Selectors
 const addBtn = document.querySelector("#addBtn");
 const input = document.querySelector("#input");
-let counterNum = 0;
 const counter = document.querySelector("#counter");
 const error = document.querySelector("#error");
 const list = document.querySelector("#list");
 
+//Global variables
+let counterNum = 0;
+let id = 0;
 const promptError = "You must enter a task"
 const promptDefault = "";
+const taskArray = [];
+const taskObj = { task: "", done: false, deleted: false};
 
 //Event listerners
 addBtn.addEventListener('click', addBtnClick);
 list.addEventListener('click', handleDeleteOrCheck);
 
-//Functions
+//Event handlers
 function addBtnClick(){
     if(input.value.length == 0){
         error.innerText = promptError;
         return;
     } else {
         error.innerText = promptDefault;
-
         const text = input.value;                   // the value of the input field is assigned to the variable text
 
         const item = document.createElement('li');   // Create a listitem and stores it in the variable item
@@ -35,6 +38,8 @@ function addBtnClick(){
         trashcan.innerHTML = '&#x1F5D1';
         trashcan.setAttribute('class', 'trashcan');
         item.appendChild(trashcan);
+        taskArray.push(new task(id, text, false, false));
+        id++;
     }
     input.value = "";
 }
@@ -46,7 +51,7 @@ function handleDeleteOrCheck(e){
     completedToggle(e);
     }
 }
-
+// Helper functions
 function completedToggle(e){                // Checks if element has the style class of completed and assigns it and increases the counter
     let item = e.target.parentNode;
     if( item.getAttribute('class') == 'completed'){
@@ -61,4 +66,11 @@ function completedToggle(e){                // Checks if element has the style c
 function deleteTodo(e){
     item = e.target.parentNode;
     item.remove();
+}
+// Constructor for Task objects
+function task(id, task, done, deleted){
+    this.id = id;
+    this.task = task;
+    this.done = done;
+    this.deleted = deleted;
 }
