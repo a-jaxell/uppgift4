@@ -39,14 +39,17 @@ function addBtnClick(){
         
         const trashcan = document.createElement('span');
         trashcan.innerHTML = '&#x1F5D1';
-        trashcan.setAttribute('class', 'trashcan');
+        // trashcan.setAttribute('class', 'trashcan');
+        trashcan.classList.add(`${taskArray[i].id}`);
         item.appendChild(trashcan);
         id++;
     }
     input.value = "";
 }
 function handleDeleteOrCheck(e){
-    if( e.target.getAttribute('class') == 'trashcan'){
+    // if( e.target.getAttribute('class') == 'trashcan'){
+    if(e.target.classList.contains(objectCheck(taskArray, e.target.getAttribute('class')))){
+        taskArray[e.target.getAttribute('class')].deleted = true;
         deleteTodo(e);
     }
     if( e.target.getAttribute('class') == 'listItem'){
@@ -81,10 +84,18 @@ function task(id, task, done, deleted){
     this.done = done;
     this.deleted = deleted;
 }
+// Searches the array for string and returns object index for matching task
 function objectHandler(array, string){
-    //searches the array and returns object index for matching string
     for(i = 0; i < array.length; i++){
         if(string == array[i].task){
+            return array[i].id;
+        }
+    }
+}
+//checks if an array contains a certain id and returns id if true
+function objectCheck(array, index){
+    for(i = 0; i < array.length; i++){
+        if(index == array[i].id){
             return array[i].id;
         }
     }
