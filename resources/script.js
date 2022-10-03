@@ -65,6 +65,9 @@ function completedToggle(e){                // Checks if element has the style c
 
 function deleteTodo(e){
     item = e.target.parentNode;
+    if(item.getAttribute('class') == 'completed'){  // Updating number of completed tasks
+        counter.innerText = --counterNum + " Completed tasks";
+    }
     item.remove();
 }
 // Constructor for Task objects
